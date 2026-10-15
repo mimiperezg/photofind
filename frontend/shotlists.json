@@ -1,0 +1,82 @@
+[
+  {
+    "_id": "1",
+    "name": "NYC Weekend",
+    "location": "New York",
+    "startDate": "2026-10-30",
+    "endDate": "2026-11-01",
+    "status": "in-progress",
+    "shots": [
+      {
+        "title": "Empire State Building",
+        "notes": "",
+        "referenceUrl": "",
+        "captured": true
+      },
+      {
+        "title": "Brooklyn Bridge sunset",
+        "notes": "",
+        "referenceUrl": "",
+        "captured": true
+      },
+      {
+        "title": "Hudson River",
+        "notes": "",
+        "referenceUrl": "",
+        "captured": true
+      },
+      {
+        "title": "Moody bar",
+        "notes": "",
+        "referenceUrl": "",
+        "captured": false
+      },
+      {
+        "title": "Friend's apartment",
+        "notes": "",
+        "referenceUrl": "",
+        "captured": false
+      }
+    ]
+  },
+  {
+    "_id": "2",
+    "name": "Ski Spring Break",
+    "location": "Sunday River",
+    "startDate": "2026-02-28",
+    "endDate": "2026-03-04",
+    "status": "completed",
+    "shots": [
+      {
+        "title": "Summit view",
+        "notes": "",
+        "referenceUrl": "",
+        "captured": true
+      },
+      {
+        "title": "Chairlift selfie",
+        "notes": "",
+        "referenceUrl": "",
+        "captured": true
+      },
+      {
+        "title": "First run of the day",
+        "notes": "",
+        "referenceUrl": "",
+        "captured": true
+      },
+      {
+        "title": "Lodge after skiing",
+        "notes": "",
+        "referenceUrl": "",
+        "captured": true
+      },
+      {
+        "title": "Snowy pine trees",
+        "notes": "",
+        "referenceUrl": "",
+        "captured": true
+      }
+    ]
+  }
+]

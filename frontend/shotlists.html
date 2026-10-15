@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shot Lists</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/shotlists.css" />
@@ -21,15 +21,24 @@
       </div>
 
       <!-- this will be categoies of shotlists  - all, upcoming, in progress, completed. its a filter -->
-       <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+      <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
         <div class="btn-group" role="group" aria-label="filter by status">
           <button class="btn btn-outline-dark" data-status="all">All</button>
-          <button class="btn btn-outline-dark" data-status="upcoming">Upcoming</button>
-          <button class="btn btn-outline-dark" data-status="in-progress">In Progress</button>
-          <button class="btn btn-outline-dark" data-status="completed">Completed</button>
+          <button class="btn btn-outline-dark" data-status="upcoming">
+            Upcoming
+          </button>
+          <button class="btn btn-outline-dark" data-status="in-progress">
+            In Progress
+          </button>
+          <button class="btn btn-outline-dark" data-status="completed">
+            Completed
+          </button>
         </div>
+      </div>
 
-        <!-- left column will be the shot lists -->
+      <!-- left column will be the shot lists -->
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="./js/shotlists.js"></script>
   </body>
 </html>
