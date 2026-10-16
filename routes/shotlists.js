@@ -30,4 +30,21 @@ router.patch("/shotlists/:id/shots/:index", async (req, res) => {
   }
 });
 
+// creating new shotlist route
+router.post("/shotlists", async (req, res) => {
+  try {
+    // the new shot list that the form sends
+    const newShotlist = req.body;
+    if (!newShotlist.name) {
+      return res.status(400).json({ error: "Name is required" });
+    }
+
+    const id = await myDB.createShotlist(newShotlist);
+    res.status(201).json({ ...newShotlist, _id: id });
+  } catch (err) {
+    console.error("error creating shotlist", err);
+    res.status(500).json({ error: "failed to create shotlist" });
+  }
+});
+
 export default router;

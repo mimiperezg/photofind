@@ -48,5 +48,19 @@ export default function myMongoDB(
     }
   };
 
+  // create new shot list
+  me.createShotlist = async (shotlist) => {
+    const { client, shotlists } = await connect();
+
+    try {
+      // saves a new list
+      const result = await shotlists.insertOne(shotlist);
+      // mongo db gives it an _id
+      return result.insertedId;
+    } finally {
+      await client.close();
+    }
+  };
+
   return me;
 }

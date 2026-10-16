@@ -114,6 +114,53 @@ function Shotlists() {
     });
   };
 
+  const renderNewForm = () => {
+    const details = document.getElementById("shotlist-details");
+
+    details.innerHTML = `
+    <form class="card-body" id="new-shotlist-form">
+      <h2 class="h6 mb-3">New shot list</h2>
+      <label for="new-name" class="form-label">Name</label>
+      <input id="new-name" class="form-control mb-3" required />
+      <button type="submit" class="btn btn-dark">Save</button>
+    </form>
+  `;
+
+    const form = document.getElementById("new-shotlist-form");
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const name = document.getElementById("new-name").value;
+      // the new list (only doing name right now)
+      const newShotList = {
+        name: name,
+        location: "",
+        startDate: "",
+        endDate: "",
+        status: "upcoming",
+        shots: [],
+      };
+
+      // send it to the server to save
+      const res = await fetch("/api/shotlists", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(newShotList),
+      });
+
+      if (!res.ok) {
+        me.showError({ msg: "failed to create shot list", res });
+        return;
+      }
+
+      // add saved list to top then redraw
+      const saved = await res.json();
+      allShotlists.unshift(saved);
+      renderShotlists();
+      renderDetails(saved);
+    });
+  };
+
   const renderShotlists = () => {
     const shotlistsContainer = document.getElementById("shotlists-container");
     shotlistsContainer.innerHTML = "";
@@ -158,7 +205,7 @@ function Shotlists() {
         <div class="progress-bar bg-success" style="width: ${percent}%"></div>
       </div>
     </div>
-  `;
+    `;
 
       // make the card clickable to navigate to the shotlist details page
       card.addEventListener("click", () => {
@@ -172,6 +219,13 @@ function Shotlists() {
       });
 
       shotlistsContainer.appendChild(card);
+    });
+  };
+
+  // new shot list button
+  me.setupNewListButton = () => {
+    document.getElementById("newListBtn").addEventListener("click", () => {
+      renderNewForm();
     });
   };
 
@@ -210,4 +264,5 @@ function Shotlists() {
 
 const myShotlists = Shotlists();
 myShotlists.setupFilters();
+myShotlists.setupNewListButton();
 myShotlists.refreshShotlists();
