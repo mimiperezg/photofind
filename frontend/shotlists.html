@@ -37,10 +37,30 @@
       </div>
 
       <!-- left column will be the shot lists -->
-      <div
-        id="shotlists-container"
-        class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"
-      ></div>
+      <div class="row g-3">
+        <section class="col-lg-5">
+          <div id="shotlists-container" class="d-flex flex-column gap-2"></div>
+        </section>
+
+        <!-- right column is selected shot list details -->
+        <section class="col-lg-7">
+          <div id="shotlist-details-container" class="card">
+            <div class="card-body text-body-secondary">
+              Select shot list to view details
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- bottom of the page is statistics on user's shot lists-->
+      <section class="card mt-4">
+        <div class="card-body">
+          <h2 class="h5 mb-3">Statistics</h2>
+          <div id="shotlists-stats" class="row g-3 text-center">
+            <!-- statistics will go here -->
+          </div>
+        </div>
+      </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="./js/shotlists.js"></script>
