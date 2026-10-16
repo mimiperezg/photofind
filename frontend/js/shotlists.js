@@ -1,6 +1,8 @@
 function Shotlists() {
   const me = {};
   let allShotlists = [];
+  // default status filter is all
+  let currentStatus = "all";
 
   me.showError = ({ msg, res, type = "danger" } = {}) => {
     const main = document.querySelector("main");
@@ -107,17 +109,24 @@ function Shotlists() {
         // this updates the copy in the browser
         shotlist.shots[index].captured = checkbox.checked;
         renderDetails(shotlist);
-        renderShotlists(allShotlists.slice(0, 20));
+        renderShotlists();
       });
     });
   };
 
-  const renderShotlists = (shotlists) => {
+  const renderShotlists = () => {
     const shotlistsContainer = document.getElementById("shotlists-container");
     shotlistsContainer.innerHTML = "";
+
+    // pick which list to show based on selected status filter. only showing up to 20 at a time.
+    const filtered =
+      currentStatus === "all"
+        ? allShotlists
+        : allShotlists.filter((s) => s.status === currentStatus);
+
     // for each shot list, create a card and append it to the container
     // use name, location, date, status, and how many shots captured to display in the card
-    shotlists.forEach((shotlist) => {
+    filtered.slice(0, 20).forEach((shotlist) => {
       // total number of shots in the shotlist
       const total = shotlist.shots.length;
       // number of shots that have been captured in the shotlist
@@ -166,6 +175,23 @@ function Shotlists() {
     });
   };
 
+  // go through each filter button and add an event listener to it to filter the shotlists based on the status
+  me.setupFilters = () => {
+    const filterButtons = document.querySelectorAll("[data-status]");
+
+    filterButtons.forEach((button) => {
+      // user clicks filter button
+      button.addEventListener("click", () => {
+        currentStatus = button.dataset.status;
+        filterButtons.forEach((b) => b.classList.remove("active"));
+        button.classList.add("active");
+        renderShotlists();
+      });
+    });
+  };
+
+  // fetch the shotlists from the backend, saves them in list, and
+  // then calls renderShotlists to display them
   me.refreshShotlists = async () => {
     const res = await fetch("/api/shotlists");
     if (!res.ok) {
@@ -176,11 +202,12 @@ function Shotlists() {
     const shotlists = await res.json();
     allShotlists = shotlists;
     console.log("Fetched shotlists:", shotlists);
-    renderShotlists(shotlists.slice(0, 20));
+    renderShotlists();
   };
 
   return me;
 }
 
 const myShotlists = Shotlists();
+myShotlists.setupFilters();
 myShotlists.refreshShotlists();
