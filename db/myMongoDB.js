@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 export default function myMongoDB(
   dbName = "photofind",
@@ -23,6 +23,25 @@ export default function myMongoDB(
       return data;
     } catch (err) {
       console.error("Error fetching shotlists from MongoDB:", err);
+      throw err;
+    } finally {
+      await client.close();
+    }
+  };
+
+  me.updateShotCaptured = async (id, index, captured) => {
+    const { client, shotlists } = await connect();
+
+    try {
+      // update that one shot's captured status in the database
+      const result = await shotlists.updateOne(
+        { _id: new ObjectId(id) },
+        { $set: { [`shots.${index}.captured`]: captured } },
+      );
+      console.log("Updated shot captured status:", result.modifiedCount);
+      return result;
+    } catch (err) {
+      console.error("Error updating shot captured status:", err);
       throw err;
     } finally {
       await client.close();

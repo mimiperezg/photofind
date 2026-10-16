@@ -90,6 +90,26 @@ function Shotlists() {
         </ul>
       </div>
     `;
+
+    // find all checkboxes inn the details section and
+    // add an event listener to each one to update the captured status of that shot in the database
+    details.querySelectorAll(".form-check-input").forEach((checkbox, index) => {
+      // waiting for user to tick or untick the checkbox
+      checkbox.addEventListener("change", async () => {
+        // send a patch request to the backend to update the captured status of the shot in the DB
+        // sending a message to express route
+        await fetch(`/api/shotlists/${shotlist._id}/shots/${index}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ captured: checkbox.checked }),
+        });
+
+        // this updates the copy in the browser
+        shotlist.shots[index].captured = checkbox.checked;
+        renderDetails(shotlist);
+        renderShotlists(allShotlists.slice(0, 20));
+      });
+    });
   };
 
   const renderShotlists = (shotlists) => {
