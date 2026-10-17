@@ -120,8 +120,22 @@ function Shotlists() {
     details.innerHTML = `
     <form class="card-body" id="new-shotlist-form">
       <h2 class="h6 mb-3">New shot list</h2>
+
       <label for="new-name" class="form-label">Name</label>
       <input id="new-name" class="form-control mb-3" required />
+
+      <label for="new-location" class="form-label">Location</label>
+      <input id="new-location" class="form-control mb-3" required />
+
+      <label for="new-start" class="form-label">Start date</label>
+      <input id="new-start" type="date" class="form-control mb-3" required />
+
+      <label for="new-end" class="form-label">End date</label>
+      <input id="new-end" type="date" class="form-control mb-3" required />
+
+      <label for="new-shots" class="form-label">Shots (one per line)</label>
+      <textarea id="new-shots" class="form-control mb-3" rows="5"></textarea>
+
       <button type="submit" class="btn btn-dark">Save</button>
     </form>
   `;
@@ -131,14 +145,25 @@ function Shotlists() {
       event.preventDefault();
 
       const name = document.getElementById("new-name").value;
-      // the new list (only doing name right now)
+
+      const shotsText = document.getElementById("new-shots").value;
+      const shots = shotsText
+        // breaks text at new line
+        .split("\n")
+        // removes extra spaces
+        .map((line) => line.trim())
+        // drops empty lines
+        .filter((line) => line !== "")
+        // turns each title into a shot object
+        .map((line) => ({ title: line, notes: null, captured: false }));
+      // the new list
       const newShotList = {
-        name: name,
-        location: "",
-        startDate: "",
-        endDate: "",
+        name: document.getElementById("new-name").value,
+        location: document.getElementById("new-location").value,
+        startDate: document.getElementById("new-start").value,
+        endDate: document.getElementById("new-end").value,
         status: "upcoming",
-        shots: [],
+        shots: shots,
       };
 
       // send it to the server to save
