@@ -47,4 +47,19 @@ router.post("/shotlists", async (req, res) => {
   }
 });
 
+// delete shotlist
+router.delete("/shotlists/:id", async (req, res) => {
+  try {
+    const deleted = await myDB.deleteShotlist(req.params.id);
+
+    if (deleted === 0) {
+      return res.status(404).json({ error: "shot list not found " });
+    }
+    res.json({ ok: true });
+  } catch (err) {
+    console.error("error deleting shotlist:", err);
+    res.status(500).json({ error: "failed to delete shotlist" });
+  }
+});
+
 export default router;

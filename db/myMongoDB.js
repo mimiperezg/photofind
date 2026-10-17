@@ -62,5 +62,16 @@ export default function myMongoDB(
     }
   };
 
+  me.deleteShotlist = async (id) => {
+    const { client, shotlists } = await connect();
+
+    try {
+      const result = await shotlists.deleteOne({ _id: new ObjectId(id) });
+      return result.deletedCount;
+    } finally {
+      await client.close();
+    }
+  };
+
   return me;
 }

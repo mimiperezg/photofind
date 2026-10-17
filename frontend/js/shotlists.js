@@ -12,6 +12,23 @@ function Shotlists() {
     main.prepend(alert);
   };
 
+  // success message for users
+  const showSuccess = (msg) => {
+    const messageArea = document.getElementById("message-area");
+
+    const alert = document.createElement("div");
+    // bootstrap alert classes and styling
+    alert.className = "alert alert-success py-1 px-2 mb-0 small";
+    alert.setAttribute("role", "status");
+    alert.innerText = msg;
+
+    messageArea.innerHTML = "";
+    messageArea.appendChild(alert);
+
+    // remove after 3 seconds
+    setTimeout(() => alert.remove(), 3000);
+  };
+
   // dictionary of status labels from mock data to give to display
   const statusLabel = (status) =>
     ({
@@ -70,7 +87,7 @@ function Shotlists() {
           </div>
           <div class="d-flex gap-2">
             <button class="btn btn-sm btn-outline-primary">Edit</button>
-            <button class="btn btn-sm btn-outline-danger">Delete</button>
+            <button class="btn btn-sm btn-outline-danger" id="delete-btn">Delete</button>
           </div>
         </div>
 
@@ -112,6 +129,37 @@ function Shotlists() {
         renderShotlists();
       });
     });
+
+    // delete this shotlist
+    document
+      .getElementById("delete-btn")
+      .addEventListener("click", async () => {
+        if (!confirm(`Delete "${shotlist.name}"?`)) {
+          return;
+        }
+
+        const res = await fetch(`/api/shotlists/${shotlist._id}`, {
+          method: "DELETE",
+        });
+
+        if (!res.ok) {
+          me.showError({ msg: "failed to delete shotlist", res });
+          return;
+        }
+
+        // remove it from the page's copy and redraw
+        allShotlists = allShotlists.filter((s) => s._id !== shotlist._id);
+        renderShotlists();
+        // call success message
+        showSuccess(`Deleted "${shotlist.name}"`);
+
+        // redraw the select shotlists message
+        details.innerHTML = `
+        <div class="card-body text-body-secondary">
+          Select shot list to view details
+        </div>
+      `;
+      });
   };
 
   const renderNewForm = () => {
@@ -143,8 +191,6 @@ function Shotlists() {
     const form = document.getElementById("new-shotlist-form");
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-
-      const name = document.getElementById("new-name").value;
 
       const shotsText = document.getElementById("new-shots").value;
       const shots = shotsText
@@ -182,6 +228,7 @@ function Shotlists() {
       const saved = await res.json();
       allShotlists.unshift(saved);
       renderShotlists();
+      showSuccess(`Created "${saved.name}"`);
       renderDetails(saved);
     });
   };
