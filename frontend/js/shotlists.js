@@ -86,7 +86,7 @@ function Shotlists() {
             </p>
           </div>
           <div class="d-flex gap-2">
-            <button class="btn btn-sm btn-outline-primary">Edit</button>
+            <button class="btn btn-sm btn-outline-primary" id="edit-btn">Edit</button>
             <button class="btn btn-sm btn-outline-danger" id="delete-btn">Delete</button>
           </div>
         </div>
@@ -160,6 +160,11 @@ function Shotlists() {
         </div>
       `;
       });
+
+    // edit button
+    document.getElementById("edit-btn").addEventListener("click", () => {
+      renderEditform(shotlist);
+    });
   };
 
   const renderNewForm = () => {
@@ -231,6 +236,72 @@ function Shotlists() {
       showSuccess(`Created "${saved.name}"`);
       renderDetails(saved);
     });
+  };
+
+  const renderEditform = (shotlist) => {
+    const details = document.getElementById("shotlist-details");
+
+    details.innerHTML = `
+      <form class="card-body" id="edit-shotlist-form">
+        <h2 class="h6 mb-3">Edit shot list</h2>
+
+        <label for="edit-name" class="form-label">Name</label>
+        <input id="edit-name" class="form-control mb-3" required />
+
+        <label for="edit-location" class="form-label">Location</label>
+        <input id="edit-location" class="form-control mb-3" />
+
+        <label for="edit-start" class="form-label">Start date</label>
+        <input id="edit-start" type="date" class="form-control mb-3" required />
+
+        <label for="edit-end" class="form-label">End date</label>
+        <input id="edit-end" type="date" class="form-control mb-3" required />
+
+        <button type="submit" class="btn btn-dark">Save</button>
+        <button type="button" class="btn btn-outline-secondary" id="cancel-edit">Cancel</button>
+      </form>
+    `;
+
+    // fill in current values
+    document.getElementById("edit-name").value = shotlist.name;
+    document.getElementById("edit-location").value = shotlist.location;
+    document.getElementById("edit-start").value = shotlist.startDate;
+    document.getElementById("edit-end").value = shotlist.endDate;
+
+    // cancel goes back to details
+    document.getElementById("cancel-edit").addEventListener("click", () => {
+      renderDetails(shotlist);
+    });
+
+    // save the changes
+    document
+      .getElementById("edit-shotlist-form")
+      .addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const updates = {
+          name: document.getElementById("edit-name").value,
+          location: document.getElementById("edit-location").value,
+          startDate: document.getElementById("edit-start").value,
+          endDate: document.getElementById("edit-end").value,
+        };
+
+        const res = await fetch(`api/shotlists/${shotlist._id}`, {
+          method: "PUT",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(updates),
+        });
+
+        if (!res.ok) {
+          me.showError({ msg: "failed to update shotlist", res });
+          return;
+        }
+
+        Object.assign(shotlist, updates);
+        renderShotlists();
+        renderDetails(shotlist);
+        showSuccess(`Updates "${shotlist.name}"`);
+      });
   };
 
   const renderShotlists = () => {

@@ -73,5 +73,19 @@ export default function myMongoDB(
     }
   };
 
+  me.editShotlist = async (id, updates) => {
+    const { client, shotlists } = await connect();
+
+    try {
+      const result = await shotlists.updateOne(
+        { _id: new ObjectId(id) },
+        { $set: updates },
+      );
+      return result.matchedCount;
+    } finally {
+      await client.close();
+    }
+  };
+
   return me;
 }

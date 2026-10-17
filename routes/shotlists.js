@@ -62,4 +62,29 @@ router.delete("/shotlists/:id", async (req, res) => {
   }
 });
 
+router.put("/shotlists/:id", async (req, res) => {
+  try {
+    const { name, location, startDate, endDate } = req.body;
+    // make sure name is there
+    if (!name) {
+      return res.status(400).json({ error: "Name is required" });
+    }
+
+    const matched = await myDB.editShotlist(req.params.id, {
+      name,
+      location,
+      startDate,
+      endDate,
+    });
+
+    if (matched === 0) {
+      return res.status(404).json({ error: "Shot list not found" });
+    }
+    res.json({ ok: true });
+  } catch (err) {
+    console.error("Error updating shotlist:", err);
+    res.status(500).json({ error: "Failed to update shotlist" });
+  }
+});
+
 export default router;
