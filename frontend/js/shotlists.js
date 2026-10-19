@@ -4,6 +4,11 @@ function Shotlists() {
   // default status filter is all
   let currentStatus = "all";
 
+  // remember the page we are on
+  let currentPage = 1;
+  // shotlists per page
+  const pageSize = 3;
+
   me.showError = ({ msg, res, type = "danger" } = {}) => {
     const main = document.querySelector("main");
     const alert = document.createElement("div");
@@ -314,9 +319,22 @@ function Shotlists() {
         ? allShotlists
         : allShotlists.filter((s) => s.status === currentStatus);
 
+    // calculated how many pages based off the number of shotlists and page size
+    const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+    // where the page starts, which shotlist it starts on (index)
+    const start = (currentPage - 1) * pageSize;
+
+    // which page the user is on
+    document.getElementById("page-info").textContent =
+      `Page ${currentPage} of ${totalPages}`;
+    // disable prev page button if on page 1
+    document.getElementById("prev-page").disabled = currentPage === 1;
+    // disable next page button if on last page
+    document.getElementById("next-page").disabled = currentPage === totalPages;
+
     // for each shot list, create a card and append it to the container
     // use name, location, date, status, and how many shots captured to display in the card
-    filtered.slice(0, 20).forEach((shotlist) => {
+    filtered.slice(start, start + pageSize).forEach((shotlist) => {
       // total number of shots in the shotlist
       const total = shotlist.shots.length;
       // number of shots that have been captured in the shotlist
@@ -416,6 +434,20 @@ function Shotlists() {
     `;
   };
 
+  me.setupPagination = () => {
+    document.getElementById("prev-page").addEventListener("click", () => {
+      // go back one page
+      currentPage--;
+      renderShotlists();
+    });
+
+    document.getElementById("next-page").addEventListener("click", () => {
+      // go up one page
+      currentPage++;
+      renderShotlists();
+    });
+  };
+
   // new shot list button
   me.setupNewListButton = () => {
     document.getElementById("newListBtn").addEventListener("click", () => {
@@ -431,6 +463,8 @@ function Shotlists() {
       // user clicks filter button
       button.addEventListener("click", () => {
         currentStatus = button.dataset.status;
+        // reset to page one when filter changes
+        currentPage = 1;
         filterButtons.forEach((b) => b.classList.remove("active"));
         button.classList.add("active");
         renderShotlists();
@@ -458,5 +492,6 @@ function Shotlists() {
 
 const myShotlists = Shotlists();
 myShotlists.setupFilters();
+myShotlists.setupPagination();
 myShotlists.setupNewListButton();
 myShotlists.refreshShotlists();

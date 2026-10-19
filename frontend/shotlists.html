@@ -44,6 +44,17 @@
         <!-- left column will be the shot lists -->
         <section class="col-lg-5">
           <div id="shotlists-container" class="d-flex flex-column gap-2"></div>
+
+          <!-- pagination -->
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <button class="btn btn-outline-dark btn-sm" id="prev-page">
+              Previous
+            </button>
+            <span id="page-info" class="small text-body-secondary"></span>
+            <button class="btn btn-outline-dark btn-sm" id="next-page">
+              Next
+            </button>
+          </div>
         </section>
 
         <!-- right column is selected shot list details -->
@@ -60,9 +71,7 @@
       <section class="card mt-4">
         <div class="card-body">
           <h2 class="h5 mb-3">Statistics</h2>
-          <div id="shotlists-stats" class="row g-3 text-center">
-            <!-- statistics will go here -->
-          </div>
+          <div id="shotlists-stats" class="row g-3 text-center"></div>
         </div>
       </section>
     </main>
