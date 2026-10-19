@@ -2,7 +2,7 @@
 
 A web app for organizing, finding, and planning photos, built with Node, Express, MongoDB, and vanilla JavaScript.
 
-- **Live site:** [Add deployed link here]
+- **Live site:** [PhotoFind on Render](https://photofind-lhvb.onrender.com)]
 - **Design document:** [Design document (PDF)](docs/design-document.pdf)
 - **Video demo and presentation:** [Watch on YouTube](ADD-LINK-HERE)
 - **Slides:** [Presentation](ADD-LINK-HERE)
