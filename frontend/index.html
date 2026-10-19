@@ -8,12 +8,75 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="css/home.css" />
   </head>
   <body>
-    <header>
-      <h1>PhotoFind</h1>
-    </header>
-    <script type="module" src="./js/frontend.js"></script>
+    <!-- navigation (same on every page) -->
+    <nav class="navbar navbar-expand border-bottom">
+      <div class="container">
+        <a class="navbar-brand fw-semibold" href="index.html">PhotoFind</a>
+        <ul class="navbar-nav ms-auto flex-wrap">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="search.html">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="shotlists.html">Shot Lists</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="container py-5">
+      <h1 class="home-title">PhotoFind</h1>
+      <p class="home-intro">
+        Organize and find the photos you have and plan the ones you want to
+        take.
+      </p>
+
+      <div class="row g-4">
+        <section class="col-md-6">
+          <div class="feature">
+            <h2 class="feature-title">Find your photos</h2>
+            <p class="feature-text">
+              Add images by uploading or pasting a URL, give them tags and a
+              description, and search by what you remember.
+            </p>
+          </div>
+        </section>
+
+        <section class="col-md-6">
+          <div class="feature">
+            <h2 class="feature-title">Plan your shots</h2>
+            <p class="feature-text">
+              Plan the photos you want to take on a trip, and track them as you
+              go.
+            </p>
+            <ul class="feature-list">
+              <li>
+                Click <strong>+ New shot list</strong> to add a trip with dates
+                and the shots you want
+              </li>
+              <li>
+                Click a list to see its shots, and check them off as you take
+                them
+              </li>
+              <li>Filter lists by upcoming, in progress, or completed</li>
+              <li>Edit or delete a list anytime</li>
+              <li>See your overall progress in the statistics at the bottom</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </main>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
