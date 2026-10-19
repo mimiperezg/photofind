@@ -1,0 +1,51 @@
+.shotlist-card {
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.shotlist-card,
+#shotlist-details,
+.stats-card {
+  border: 1px solid var(--bs-gray-500);
+}
+
+.shotlist-card .card-body {
+  padding: 0.75rem 1rem;
+}
+
+.shotlist-card:hover {
+  background-color: var(--bs-tertiary-bg);
+}
+
+.shotlist-card.active {
+  border: 2px solid var(--bs-dark);
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.page-info {
+  font-size: 0.875rem;
+  color: var(--bs-secondary-color);
+}
