@@ -363,6 +363,57 @@ function Shotlists() {
 
       shotlistsContainer.appendChild(card);
     });
+
+    renderStats();
+  };
+  // statistics across all shots
+  const renderStats = () => {
+    const statsContainer = document.getElementById("shotlists-stats");
+
+    const totalLists = allShotlists.length;
+    let shotsPlanned = 0;
+    let shotsCaptured = 0;
+
+    // calculate how many shots captured out of the ones planned
+    allShotlists.forEach((shotlist) => {
+      shotsPlanned += shotlist.shots.length;
+      shotsCaptured += shotlist.shots.filter((shot) => shot.captured).length;
+    });
+
+    let completion;
+    if (shotsPlanned === 0) {
+      completion = 0;
+    } else {
+      completion = Math.round((shotsCaptured / shotsPlanned) * 100);
+    }
+
+    // create stats html
+    statsContainer.innerHTML = `
+      <div class="col-6 col-md-3">
+        <div class="border rounded p-2">
+          <small class="text-body-secondary">Lists</small>
+          <div class="fs-4 fw-semibold">${totalLists}</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="border rounded p-2">
+          <small class="text-body-secondary">Shots planned</small>
+          <div class="fs-4 fw-semibold">${shotsPlanned}</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="border rounded p-2">
+          <small class="text-body-secondary">Shots captured</small>
+          <div class="fs-4 fw-semibold">${shotsCaptured}</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="border rounded p-2">
+          <small class="text-body-secondary">Completion</small>
+          <div class="fs-4 fw-semibold">${completion}%</div>
+        </div>
+      </div>
+    `;
   };
 
   // new shot list button
