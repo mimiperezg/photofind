@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image - PhotoFind</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/images.css" />
+  </head>
+  <body>
+    <!-- navigation (same on every page) -->
+    <nav class="navbar navbar-expand border-bottom">
+      <div class="container">
+        <a class="navbar-brand fw-semibold" href="index.html">PhotoFind</a>
+        <ul class="navbar-nav ms-auto flex-wrap">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="search.html">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="shotlists.html">Shot Lists</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="container py-4">
+      <a href="gallery.html" class="d-inline-block mb-3"
+        >&larr; Back to gallery</a
+      >
+
+      <h1 class="visually-hidden">Image details</h1>
+
+      <div id="message-area"></div>
+
+      <div id="image-content" class="row g-4 d-none">
+        <div class="col-lg-8">
+          <img id="detail-img" class="detail-image rounded border" alt="" />
+        </div>
+
+        <div class="col-lg-4">
+          <!-- view mode -->
+          <div id="view-panel" class="card">
+            <div class="card-body">
+              <h2 class="h6 text-body-secondary text-uppercase small">Tags</h2>
+              <div id="detail-tags" class="d-flex flex-wrap gap-1 mb-3"></div>
+
+              <h2 class="h6 text-body-secondary text-uppercase small">
+                Description
+              </h2>
+              <p id="detail-description" class="mb-3"></p>
+
+              <p id="detail-meta" class="small text-body-secondary"></p>
+
+              <div class="d-flex gap-2">
+                <button id="edit-btn" class="btn btn-sm btn-outline-primary">
+                  Edit
+                </button>
+                <button id="delete-btn" class="btn btn-sm btn-outline-danger">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- edit mode, hidden until Edit is clicked -->
+          <form id="edit-form" class="card d-none" novalidate>
+            <div class="card-body">
+              <h2 class="h6 mb-3">Edit image</h2>
+
+              <label for="edit-tags" class="form-label">Tags</label>
+              <input id="edit-tags" class="form-control" />
+              <div class="form-text mb-3">
+                Separate tags with commas. Up to 10.
+              </div>
+
+              <label for="edit-description" class="form-label"
+                >Description</label
+              >
+              <textarea
+                id="edit-description"
+                class="form-control mb-3"
+                rows="4"
+                maxlength="500"
+              ></textarea>
+
+              <button id="save-btn" type="submit" class="btn btn-dark btn-sm">
+                Save
+              </button>
+              <button id="cancel-btn" type="button" class="btn btn-link btn-sm">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="./js/imageDetail.js"></script>
+  </body>
+</html>

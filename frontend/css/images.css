@@ -1,0 +1,60 @@
+/* square crops so the grid lines up no matter the photo shape */
+.image-thumb {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background-color: var(--bs-secondary-bg);
+}
+
+.image-card-link:hover .image-thumb {
+  opacity: 0.9;
+}
+
+/* keep long descriptions to two lines in the grid */
+.image-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tag-badge {
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.tag-badge:hover {
+  background-color: var(--bs-secondary-bg) !important;
+}
+
+.tag-matched {
+  background-color: var(--bs-warning-bg-subtle) !important;
+  border-color: var(--bs-warning-border-subtle) !important;
+}
+
+mark {
+  padding: 0 0.1em;
+}
+
+/* tag filter row scrolls sideways on phones instead of wrapping into a wall */
+.tag-filter {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.tag-filter .btn {
+  white-space: nowrap;
+}
+
+.detail-image {
+  max-height: 75vh;
+  width: 100%;
+  object-fit: contain;
+  background-color: var(--bs-secondary-bg);
+}
+
+.add-preview {
+  max-height: 320px;
+  max-width: 100%;
+  object-fit: contain;
+}
