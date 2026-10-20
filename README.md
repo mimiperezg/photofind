@@ -6,7 +6,7 @@ A web app for organizing, finding, and planning photos, built with Node, Express
 - **Design documents:**
   - Shot Lists (Milena): [Design document](docs/design-document-shotlists.pdf)
   - Images and Search (Rishabh): [Design document](docs/design-document-search.pdf)
-- **Video demo and presentation:** [Watch on YouTube](ADD-LINK-HERE)
+- **Video demo and presentation:** [Watch on YouTube](https://youtu.be/HrW2NOhEio8)
 - **Slides:** [Presentation](https://docs.google.com/presentation/d/1BLYR7r4rk_WIs3N6ubYqKLufcZmeoD5yGF6nn5ba8NQ/edit?usp=sharing)
 
 ![Screenshot of the Shot Lists page](images/shotlists-screenshot.jpg)
