@@ -3,7 +3,7 @@ import { MongoClient, ObjectId } from "mongodb";
 export default function myMongoDB(
   dbName = "photofind",
   collectionName = "shotLists",
-  defaultUri = "mongodb://localhost:27017",
+  defaultUri = "mongodb://localhost:27017"
 ) {
   const me = {};
   const URI = process.env.MONGODB_URI || defaultUri;
@@ -36,7 +36,7 @@ export default function myMongoDB(
       // update that one shot's captured status in the database
       const result = await shotlists.updateOne(
         { _id: new ObjectId(id) },
-        { $set: { [`shots.${index}.captured`]: captured } },
+        { $set: { [`shots.${index}.captured`]: captured } }
       );
       console.log("Updated shot captured status:", result.modifiedCount);
       return result;
@@ -79,7 +79,7 @@ export default function myMongoDB(
     try {
       const result = await shotlists.updateOne(
         { _id: new ObjectId(id) },
-        { $set: updates },
+        { $set: updates }
       );
       return result.matchedCount;
     } finally {

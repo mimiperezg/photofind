@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search - PhotoFind</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/images.css" />
+  </head>
+  <body>
+    <!-- navigation (same on every page) -->
+    <nav class="navbar navbar-expand border-bottom">
+      <div class="container">
+        <a class="navbar-brand fw-semibold" href="index.html">PhotoFind</a>
+        <ul class="navbar-nav ms-auto flex-wrap">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="search.html"
+              >Search</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="shotlists.html">Shot Lists</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="container py-4">
+      <h1 class="h3 mb-3">Search</h1>
+
+      <form id="search-form" class="mb-3" role="search">
+        <div class="input-group">
+          <input
+            id="search-input"
+            type="search"
+            class="form-control"
+            placeholder="Type what you remember, e.g. dog on the beach at sunset"
+            aria-label="Search images"
+            autocomplete="off"
+          />
+          <button class="btn btn-dark" type="submit">Search</button>
+        </div>
+        <div class="form-text">
+          Images are ranked by how many of your words match their tags and
+          description.
+        </div>
+      </form>
+
+      <div id="message-area"></div>
+
+      <p id="search-summary" class="small text-body-secondary"></p>
+
+      <div
+        id="search-results"
+        class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3"
+      ></div>
+    </main>
+    <script type="module" src="./js/search.js"></script>
+  </body>
+</html>

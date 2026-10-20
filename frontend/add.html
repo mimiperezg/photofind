@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Image - PhotoFind</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/images.css" />
+  </head>
+  <body>
+    <!-- navigation (same on every page) -->
+    <nav class="navbar navbar-expand border-bottom">
+      <div class="container">
+        <a class="navbar-brand fw-semibold" href="index.html">PhotoFind</a>
+        <ul class="navbar-nav ms-auto flex-wrap">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="search.html">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="shotlists.html">Shot Lists</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="container py-4" style="max-width: 720px">
+      <h1 class="h3 mb-3">Add image</h1>
+
+      <div id="message-area"></div>
+
+      <form id="add-form" class="card" novalidate>
+        <div class="card-body">
+          <!-- upload or url, switches which input is shown -->
+          <div class="btn-group mb-3" role="group" aria-label="image source">
+            <input
+              type="radio"
+              class="btn-check"
+              name="source"
+              id="source-upload"
+              value="upload"
+              checked
+            />
+            <label class="btn btn-outline-dark" for="source-upload"
+              >Upload file</label
+            >
+            <input
+              type="radio"
+              class="btn-check"
+              name="source"
+              id="source-url"
+              value="url"
+            />
+            <label class="btn btn-outline-dark" for="source-url"
+              >Paste URL</label
+            >
+          </div>
+
+          <div id="upload-fields" class="mb-3">
+            <label for="file-input" class="form-label">Image file</label>
+            <input
+              id="file-input"
+              type="file"
+              class="form-control"
+              accept="image/*"
+            />
+            <div class="form-text">
+              Large photos are resized to 1024px before saving.
+            </div>
+          </div>
+
+          <div id="url-fields" class="mb-3 d-none">
+            <label for="url-input" class="form-label">Image URL</label>
+            <input
+              id="url-input"
+              type="url"
+              class="form-control"
+              placeholder="https://example.com/photo.jpg"
+            />
+          </div>
+
+          <div id="preview" class="mb-3 d-none text-center">
+            <img id="preview-img" class="add-preview rounded border" alt="" />
+            <div id="preview-info" class="form-text"></div>
+          </div>
+
+          <label for="tags-input" class="form-label">Tags</label>
+          <input
+            id="tags-input"
+            class="form-control"
+            placeholder="beach, dog, sunset"
+            aria-describedby="tags-help"
+          />
+          <div id="tags-help" class="form-text">
+            Separate tags with commas. Up to 10.
+          </div>
+          <div id="tags-preview" class="d-flex flex-wrap gap-1 mt-1 mb-3"></div>
+
+          <label for="description-input" class="form-label"
+            >Description
+            <span class="text-body-secondary">(optional)</span></label
+          >
+          <textarea
+            id="description-input"
+            class="form-control mb-3"
+            rows="3"
+            maxlength="500"
+            placeholder="What's in the picture, where it was taken..."
+          ></textarea>
+
+          <button id="save-btn" type="submit" class="btn btn-dark">Save</button>
+          <a href="gallery.html" class="btn btn-link">Cancel</a>
+        </div>
+      </form>
+    </main>
+    <script type="module" src="./js/addImage.js"></script>
+  </body>
+</html>

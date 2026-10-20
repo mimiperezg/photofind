@@ -77,7 +77,7 @@ function Shotlists() {
             ${shot.notes ? `<br><small class="text-body-secondary">${shot.notes}</small>` : ""}
           </label>
         </li>
-      `,
+      `
       )
       .join("");
 
