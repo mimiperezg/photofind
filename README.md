@@ -61,7 +61,7 @@ Model: Claude Opus 5.5
 
 - Learning: help understanding Express routes, uploading images to MongoDB and resizing before uploads
 - Testing and verification: reviewing code, testing API routes, and fixing small UI bugs it found
-- Tooling: fixing the conflicting ESLint and Prettier settings, and removing unused packages and files
+- Dataset: creating the images json file using Wikimedia Commons
 
 ## Tech Requirements
 
@@ -92,7 +92,7 @@ Model: Claude Opus 5.5
    docker run --name mongodb -p 27017:27017 -v mongodata:/data/db -d mongodb/mongodb-community-server:latest
 ```
 
-4. Import the mock data: in MongoDB Compass, connect to `mongodb://localhost:27017`, create a database named `photofind` with a collection named `shotLists`, and import `data/shotlists.json`.
+4. Import the mock data: in MongoDB Compass, connect to `mongodb://localhost:27017`, create a database named `photofind` with a collection named `shotLists`, and import `data/shotlists.json`. Then create a collection named `images` in the same database and import `data/images.json` (1,025 sample images).
 5. Start the server:
 
 ```bash
@@ -105,7 +105,9 @@ Model: Claude Opus 5.5
    MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/
 ```
 
-The `images` collection is created automatically when you add your first image. Use `npm run dev` instead of `npm start` to restart the server automatically when files change.
+Use `npm run dev` instead of `npm start` to restart the server automatically when files change.
+
+The sample images in `data/images.json` are quality-rated photos from [Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:Quality_images), linked by URL and used under their respective free licenses. Their descriptions come from the photo titles.
 
 ## Authors
 
