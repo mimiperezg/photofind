@@ -55,6 +55,8 @@ const checkSrc = (source, src) => {
   }
   if (source === "url") {
     if (src.length > MAX_URL || !isHttpUrl(src)) {
+
+      // a url that's very long gets the same message, it'd be better to give it its own message like "URL is too long"
       return "URL must start with http:// or https://";
     }
     return null;
@@ -161,6 +163,7 @@ router.put("/images/:id", async (req, res) => {
       return res.status(400).json({ error });
     }
 
+    // if a request doesn't have tags or a description then it'll be saved as empty. Require both fields or only update fields that were sent
     const updates = { tags, description, updatedAt: new Date() };
     const matched = await myDB.updateImage(req.params.id, updates);
     if (matched === 0) {
