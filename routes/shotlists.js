@@ -35,6 +35,8 @@ router.post("/shotlists", async (req, res) => {
   try {
     // the new shot list that the form sends
     const newShotlist = req.body;
+
+    // a name with only spaces would pass this check, use name.trim() before checking
     if (!newShotlist.name) {
       return res.status(400).json({ error: "Name is required" });
     }
@@ -70,6 +72,8 @@ router.put("/shotlists/:id", async (req, res) => {
       return res.status(400).json({ error: "Name is required" });
     }
 
+    // I think it would be nice to reject any end dates that are before the start date
+    // If the edit form doesn't send a field then its being saved as empty so only update fields that were sent
     const matched = await myDB.editShotlist(req.params.id, {
       name,
       location,
