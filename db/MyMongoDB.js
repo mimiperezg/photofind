@@ -1,5 +1,7 @@
 import { MongoClient, ObjectId } from "mongodb";
 
+// I think naming this file as shotlistsDB.js would match the other file
+
 export default function myMongoDB(
   dbName = "photofind",
   collectionName = "shotLists",
@@ -8,6 +10,8 @@ export default function myMongoDB(
   const me = {};
   const URI = process.env.MONGODB_URI || defaultUri;
 
+  // It'd be better to create 1 client when the server starts and reuse it here
+  // the same connect() code can be used for this file and imagesDB.js
   const connect = async () => {
     const client = new MongoClient(URI);
     const shotlists = client.db(dbName).collection(collectionName);
@@ -18,6 +22,7 @@ export default function myMongoDB(
     const { client, shotlists } = await connect();
 
     try {
+      // Since this is sending 1000+ shot lists to the browser at once it might be better to use .skip() and .limit() so its faster
       const data = await shotlists.find(query).toArray();
       console.log("Fetched shotlists from MongoDB:", data.length);
       return data;
