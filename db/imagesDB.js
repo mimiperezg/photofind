@@ -24,6 +24,7 @@ export default function imagesDB(
         images
           .find(query)
           .sort({ createdAt: -1, _id: -1 })
+        // might be useful to store a small thumbnail for the grid and then full image for the details page
           .skip((page - 1) * pageSize)
           .limit(pageSize)
           .toArray(),
